@@ -1,0 +1,10 @@
+<h2>Blog</h2>
+
+<a href="{% url 'blog:post_create' %}">Add New Post</a>
+
+<hr/>
+
+{% for post in all_posts %}
+
+  <h4><a href="{% url 'blog:post_detail' post.id%}">{{post}}</h4>
+{% endfor %}  
