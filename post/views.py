@@ -5,6 +5,9 @@ from django.shortcuts import render
 
 from .models import Post
 from .forms import PostForm
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 
 
 def post_list(request):
@@ -39,3 +42,35 @@ def post_edit(request ,id):
     else:
         form = PostForm(instance=post)  
     return render(request,'post/post_edit.html',{'form':form})
+
+
+
+
+
+
+
+class PostList(ListView):
+    model = Post  
+    template_name = 'post/post_list.html'  
+    
+    
+    
+class PostDetail(DetailView):
+    model = Post   
+    
+    
+class PostUpdate(UpdateView) :
+    model = Post
+    fields =['title','content','email']
+    template_name = 'post/post_edit.html'
+    success_url = '/blog/cbv'   
+    
+    
+    
+class PostCreate(CreateView) :
+    model = Post
+    fields = ['title','content','created_at','published_at','email']
+    template_name = 'post/post_create.html'
+    success_url = '/blog/cbv'       
+    
+    
